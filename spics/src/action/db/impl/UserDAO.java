@@ -68,9 +68,9 @@ public class UserDAO implements IUserDAO {
 		
 		Query q = entityManager.createQuery("FROM User u" +
 				" WHERE ( " +
-				"   u.username LIKE :searchString" +
-				"   OR u.firstname LIKE :searchString" +
-				"   OR u.lastname LIKE :searchString " +
+				"   lower(u.username) LIKE :searchString" +
+				"   OR lower(u.firstname) LIKE :searchString" +
+				"   OR lower(u.lastname) LIKE :searchString " +
 				" )" +
 				( searchEnabled ? " AND u.enabled = :enabled" : "" )
 		);
