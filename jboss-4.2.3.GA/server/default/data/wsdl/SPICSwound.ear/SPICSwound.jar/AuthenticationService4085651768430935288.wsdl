@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="AuthenticationService" targetNamespace="http://webservice.util/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservice.util/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xs:schema targetNamespace="http://webservice.util/" version="1.0" xmlns:tns="http://webservice.util/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="SpicsWebserviceException" nillable="true" type="tns:spicsWebserviceFault"/>
+   <xs:element name="login" type="tns:login"/>
+   <xs:element name="loginResponse" type="tns:loginResponse"/>
+   <xs:element name="logout" type="tns:logout"/>
+   <xs:element name="logoutResponse" type="tns:logoutResponse"/>
+   <xs:complexType name="login">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="username" type="xs:string"/>
+     <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="loginResponse">
+    <xs:sequence>
+     <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="spicsWebserviceFault">
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:complexType name="logout">
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:complexType name="logoutResponse">
+    <xs:sequence/>
+   </xs:complexType>
+  </xs:schema>
+  </types>
+  <message name="AuthenticationService_logoutResponse">
+    <part name="logoutResponse" element="tns:logoutResponse">
+    </part>
+  </message>
+  <message name="AuthenticationService_logout">
+    <part name="logout" element="tns:logout">
+    </part>
+  </message>
+  <message name="AuthenticationService_login">
+    <part name="login" element="tns:login">
+    </part>
+  </message>
+  <message name="SpicsWebserviceException">
+    <part name="SpicsWebserviceException" element="tns:SpicsWebserviceException">
+    </part>
+  </message>
+  <message name="AuthenticationService_loginResponse">
+    <part name="loginResponse" element="tns:loginResponse">
+    </part>
+  </message>
+  <portType name="AuthenticationService">
+    <operation name="login" parameterOrder="login">
+      <input message="tns:AuthenticationService_login">
+    </input>
+      <output message="tns:AuthenticationService_loginResponse">
+    </output>
+      <fault name="SpicsWebserviceException" message="tns:SpicsWebserviceException">
+    </fault>
+    </operation>
+    <operation name="logout" parameterOrder="logout">
+      <input message="tns:AuthenticationService_logout">
+    </input>
+      <output message="tns:AuthenticationService_logoutResponse">
+    </output>
+      <fault name="SpicsWebserviceException" message="tns:SpicsWebserviceException">
+    </fault>
+    </operation>
+  </portType>
+  <binding name="AuthenticationServiceBinding" type="tns:AuthenticationService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="login">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="SpicsWebserviceException">
+        <soap:fault name="SpicsWebserviceException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="logout">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="SpicsWebserviceException">
+        <soap:fault name="SpicsWebserviceException" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="AuthenticationService">
+    <port name="AuthenticationServicePort" binding="tns:AuthenticationServiceBinding">
+      <soap:address location="http://127.0.0.1:8080/SPICSWebservice/AuthenticationServiceImpl"/>
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="DocumentationDataImportService" targetNamespace="http://webservice.util/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservice.util/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xs:schema targetNamespace="http://webservice.util/" version="1.0" xmlns:tns="http://webservice.util/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="SpicsWebserviceException" nillable="true" type="tns:spicsWebserviceFault"/>
+   <xs:element name="addValue" type="tns:addValue"/>
+   <xs:element name="addValueResponse" type="tns:addValueResponse"/>
+   <xs:element name="createDocumentationDataPatientId" type="tns:createDocumentationDataPatientId"/>
+   <xs:element name="createDocumentationDataPatientIdResponse" type="tns:createDocumentationDataPatientIdResponse"/>
+   <xs:element name="createDocumentationDataUserPatient" type="tns:createDocumentationDataUserPatient"/>
+   <xs:element name="createDocumentationDataUserPatientResponse" type="tns:createDocumentationDataUserPatientResponse"/>
+   <xs:element name="lookupAtrributeId" type="tns:lookupAtrributeId"/>
+   <xs:element name="lookupAtrributeIdResponse" type="tns:lookupAtrributeIdResponse"/>
+   <xs:element name="lookupDocumentationFormId" type="tns:lookupDocumentationFormId"/>
+   <xs:element name="lookupDocumentationFormIdResponse" type="tns:lookupDocumentationFormIdResponse"/>
+   <xs:element name="setDocumentationId" type="tns:setDocumentationId"/>
+   <xs:element name="setDocumentationIdResponse" type="tns:setDocumentationIdResponse"/>
+   <xs:complexType name="addValue">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="documentationDataId" type="xs:long"/>
+     <xs:element minOccurs="0" name="attributeId" type="xs:long"/>
+     <xs:element minOccurs="0" name="value" type="xs:anyType"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="addValueResponse">
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:complexType name="spicsWebserviceFault">
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:complexType name="createDocumentationDataPatientId">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="patientId" type="xs:long"/>
+     <xs:element minOccurs="0" name="documentationFormId" type="xs:long"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="createDocumentationDataPatientIdResponse">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="return" type="xs:long"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="createDocumentationDataUserPatient">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="username" type="xs:string"/>
+     <xs:element minOccurs="0" name="patientId" type="xs:string"/>
+     <xs:element minOccurs="0" name="documentationFormId" type="xs:long"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="createDocumentationDataUserPatientResponse">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="return" type="xs:long"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="setDocumentationId">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="documentationId" type="xs:long"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="setDocumentationIdResponse">
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:complexType name="lookupDocumentationFormId">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="documentationFormName" type="xs:string"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="lookupDocumentationFormIdResponse">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="return" type="xs:long"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="lookupAtrributeId">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="documentationFormId" type="xs:long"/>
+     <xs:element minOccurs="0" name="attributeGroupName" type="xs:string"/>
+     <xs:element minOccurs="0" name="attributeName" type="xs:string"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="lookupAtrributeIdResponse">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="return" type="xs:long"/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+  </types>
+  <message name="DocumentationDataImportService_createDocumentationDataUserPatient">
+    <part name="createDocumentationDataUserPatient" element="tns:createDocumentationDataUserPatient">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_setDocumentationId">
+    <part name="setDocumentationId" element="tns:setDocumentationId">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_createDocumentationDataPatientIdResponse">
+    <part name="createDocumentationDataPatientIdResponse" element="tns:createDocumentationDataPatientIdResponse">
+    </part>
+  </message>
+  <message name="SpicsWebserviceException">
+    <part name="SpicsWebserviceException" element="tns:SpicsWebserviceException">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_createDocumentationDataPatientId">
+    <part name="createDocumentationDataPatientId" element="tns:createDocumentationDataPatientId">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_lookupAtrributeIdResponse">
+    <part name="lookupAtrributeIdResponse" element="tns:lookupAtrributeIdResponse">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_addValueResponse">
+    <part name="addValueResponse" element="tns:addValueResponse">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_lookupDocumentationFormIdResponse">
+    <part name="lookupDocumentationFormIdResponse" element="tns:lookupDocumentationFormIdResponse">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_createDocumentationDataUserPatientResponse">
+    <part name="createDocumentationDataUserPatientResponse" element="tns:createDocumentationDataUserPatientResponse">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_lookupDocumentationFormId">
+    <part name="lookupDocumentationFormId" element="tns:lookupDocumentationFormId">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_setDocumentationIdResponse">
+    <part name="setDocumentationIdResponse" element="tns:setDocumentationIdResponse">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_addValue">
+    <part name="addValue" element="tns:addValue">
+    </part>
+  </message>
+  <message name="DocumentationDataImportService_lookupAtrributeId">
+    <part name="lookupAtrributeId" element="tns:lookupAtrributeId">
+    </part>
+  </message>
+  <portType name="DocumentationDataImportService">
+    <operation name="addValue" parameterOrder="addValue">
+      <input message="tns:DocumentationDataImportService_addValue">
+    </input>
+      <output message="tns:DocumentationDataImportService_addValueResponse">
+    </output>
+      <fault name="SpicsWebserviceException" message="tns:SpicsWebserviceException">
+    </fault>
+    </operation>
+    <operation name="createDocumentationDataPatientId" parameterOrder="createDocumentationDataPatientId">
+      <input message="tns:DocumentationDataImportService_createDocumentationDataPatientId">
+    </input>
+      <output message="tns:DocumentationDataImportService_createDocumentationDataPatientIdResponse">
+    </output>
+      <fault name="SpicsWebserviceException" message="tns:SpicsWebserviceException">
+    </fault>
+    </operation>
+    <operation name="createDocumentationDataUserPatient" parameterOrder="createDocumentationDataUserPatient">
+      <input message="tns:DocumentationDataImportService_createDocumentationDataUserPatient">
+    </input>
+      <output message="tns:DocumentationDataImportService_createDocumentationDataUserPatientResponse">
+    </output>
+      <fault name="SpicsWebserviceException" message="tns:SpicsWebserviceException">
+    </fault>
+    </operation>
+    <operation name="lookupAtrributeId" parameterOrder="lookupAtrributeId">
+      <input message="tns:DocumentationDataImportService_lookupAtrributeId">
+    </input>
+      <output message="tns:DocumentationDataImportService_lookupAtrributeIdResponse">
+    </output>
+      <fault name="SpicsWebserviceException" message="tns:SpicsWebserviceException">
+    </fault>
+    </operation>
+    <operation name="lookupDocumentationFormId" parameterOrder="lookupDocumentationFormId">
+      <input message="tns:DocumentationDataImportService_lookupDocumentationFormId">
+    </input>
+      <output message="tns:DocumentationDataImportService_lookupDocumentationFormIdResponse">
+    </output>
+      <fault name="SpicsWebserviceException" message="tns:SpicsWebserviceException">
+    </fault>
+    </operation>
+    <operation name="setDocumentationId" parameterOrder="setDocumentationId">
+      <input message="tns:DocumentationDataImportService_setDocumentationId">
+    </input>
+      <output message="tns:DocumentationDataImportService_setDocumentationIdResponse">
+    </output>
+      <fault name="SpicsWebserviceException" message="tns:SpicsWebserviceException">
+    </fault>
+    </operation>
+  </portType>
+  <binding name="DocumentationDataImportServiceBinding" type="tns:DocumentationDataImportService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="addValue">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="SpicsWebserviceException">
+        <soap:fault name="SpicsWebserviceException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="createDocumentationDataPatientId">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="SpicsWebserviceException">
+        <soap:fault name="SpicsWebserviceException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="createDocumentationDataUserPatient">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="SpicsWebserviceException">
+        <soap:fault name="SpicsWebserviceException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="lookupAtrributeId">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="SpicsWebserviceException">
+        <soap:fault name="SpicsWebserviceException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="lookupDocumentationFormId">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="SpicsWebserviceException">
+        <soap:fault name="SpicsWebserviceException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="setDocumentationId">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="SpicsWebserviceException">
+        <soap:fault name="SpicsWebserviceException" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="DocumentationDataImportService">
+    <port name="DocumentationDataImportServicePort" binding="tns:DocumentationDataImportServiceBinding">
+      <soap:address location="http://127.0.0.1:8080/SPICSWebservice/DocumentationDataImportServiceImpl"/>
+    </port>
+  </service>
+</definitions>
