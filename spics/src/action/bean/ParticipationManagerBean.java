@@ -54,7 +54,7 @@ public class ParticipationManagerBean implements ParticipationManager {
 	private String selectedUsername;
 	
 	@SuppressWarnings("unused")
-	@DataModel(value="participations",scope=ScopeType.SESSION)
+	@DataModel(value="participations",scope=ScopeType.PAGE)
 	private List<Participation> participations;
 	
 	private int page;
