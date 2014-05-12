@@ -36,9 +36,13 @@
 			
 			<a:outputPanel id="ViewPatientsPanel">
 			<s:fragment id="ViewPatientsNoResultView"
-				rendered="#{patientsDataModel.rowCount == 0}">
+				rendered="#{patientsDataModel.rowCount == 0 and not empty ViewPatients.searchString}">
 				<h:outputText value="#{messages['nopatients.info']}" />
 			</s:fragment>
+			<s:fragment id="ViewPatientsNoPatientSelectedView"
+				rendered="#{patientsDataModel.rowCount == 0 and empty ViewPatients.searchString}">
+				<h:outputText value="#{messages['nopatientselected.info']}" />
+			</s:fragment>			
 			<s:fragment id="ViewPatientsShowResultsView"
 				rendered="#{patientsDataModel.rowCount > 0}">
 				<rich:dataTable id="patientViewerTable" var="currentPatient" value="#{patientsDataModel}" rows="#{ViewPatients.ROW_COUNT}" cellpadding="0" cellspacing="0" >
