@@ -191,18 +191,18 @@ public class ViewImportExportBean implements ViewImportExport {
 		Trial trial = sessionInfo.getTrial();
 
 		FullTrialDataExport ftde = new FullTrialDataExport(trial, user == null);
-		List<TrialData> toExport;
+		int exportCount;
 		String filename = "";
 		if(user == null) {
 			Identity.instance().checkPermission(trial, SpicsPermissions.TRIAL_DATA_FULL_EXPORT);
-			toExport = trialDataDAO.getTrialDatasForFullExport(trial.getId());
+			exportCount = trialDataDAO.getTrialDataCountForFullExport(trial.getId());
 			filename = "fullexport.csv";
 		} else {
-			toExport = trialDataDAO.getTrialDatasForPersonalExport(trial.getId(), user.getUsername());
+			exportCount = trialDataDAO.getTrialDataCountForPersonalExport(trial.getId(), user.getUsername());
 			filename = user.getUsername() + "_export.csv";
 		}
 		
-		String[][] result = ftde.export(toExport);
+		
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 		// file should be downloaded without display
@@ -210,21 +210,29 @@ public class ViewImportExportBean implements ViewImportExport {
 		response.setHeader("Content-disposition","attachement; filename=\""+ filename + "\"");
 		//response.setContentLength((new Long(srcdoc.length())).intValue());
 		
+		final int ROWS_PER_QUERY = 150;
+		
 		PrintWriter writer;
 		try {
 			
 			writer = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "ISO-8859-1"));
-			// XXX this is a hardcore hack and should be streamwritten! 
-			for(int i = 0; i < result.length; i++) {
-				StringBuffer line = new StringBuffer();
-				for(int j = 0; j < result[i].length; j++) {
-					line.append(result[i][j] == null ? "" : result[i][j]);
-					line.append(';');
+			
+			for (int offset = 0; offset < exportCount; offset += ROWS_PER_QUERY) {
+				String[][] result = ftde.export(user == null ?  trialDataDAO.getTrialDatasForFullExport(trial.getId(), offset, ROWS_PER_QUERY) : 
+																trialDataDAO.getTrialDatasForPersonalExport(trial.getId(), user.getUsername(), offset, ROWS_PER_QUERY));
+				// XXX this is a hardcore hack and should be streamwritten! 
+				int i = (offset == 0) ? 0 : 1; // Skip header for subsequent calls
+				for(; i < result.length; i++) {
+					StringBuffer line = new StringBuffer();
+					for(int j = 0; j < result[i].length; j++) {
+						line.append(result[i][j] == null ? "" : result[i][j]);
+						line.append(';');
+					}
+					writer.append(line.toString()).append('\r').append('\n');
 				}
-				writer.append(line.toString()).append('\r').append('\n');
+				writer.flush();
 			}
 			
-			writer.flush();
 			writer.close();
 			
 			FacesContext.getCurrentInstance().responseComplete();

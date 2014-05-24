@@ -111,23 +111,40 @@ public class TrialDataDAO implements ITrialDataDAO {
 	}
 	/* end probably deprecated */
 	
-	@SuppressWarnings("unchecked")
-	public List<TrialData> getTrialDatasForPersonalExport(Long trialId, String username) {
-		Query q2 = entityManager.createQuery("SELECT td FROM TrialData AS td where td.patient.id in" +
+	public int getTrialDataCountForPersonalExport(Long trialId, String username) {
+		Query q2 = entityManager.createQuery("SELECT count(*) FROM TrialData AS td where td.patient.id in" +
 				"(select p.id from Patient p where p.export = true AND " +
 				"p.savedBy.username = :username AND p.participation.trial.id = :trial_id)");
 			 q2.setParameter("username", username);
 			 q2.setParameter("trial_id", trialId);
-		return q2.getResultList();
+			 return ((Number)q2.getSingleResult()).intValue();	 
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<TrialData> getTrialDatasForFullExport(Long trialId) {
+	public List<TrialData> getTrialDatasForPersonalExport(Long trialId, String username, int offset, int count) {
 		Query q2 = entityManager.createQuery("SELECT td FROM TrialData AS td where td.patient.id in" +
+				"(select p.id from Patient p where p.export = true AND " +
+				"p.savedBy.username = :username AND p.participation.trial.id = :trial_id) ORDER BY td.id");
+			 q2.setParameter("username", username);
+			 q2.setParameter("trial_id", trialId);
+		return q2.setFirstResult(offset).setMaxResults(count).getResultList();
+	}
+
+	public int getTrialDataCountForFullExport(Long trialId) {
+		Query q2 = entityManager.createQuery("SELECT count(*) FROM TrialData AS td where td.patient.id in" +
 				"(select p.id from Patient p where p.myExport = true AND " +
 				"p.participation.trial.id = :trial_id)");
 			 q2.setParameter("trial_id", trialId);
-		return q2.getResultList();
+			 return ((Number)q2.getSingleResult()).intValue();	 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TrialData> getTrialDatasForFullExport(Long trialId, int offset, int count) {
+		Query q2 = entityManager.createQuery("SELECT td FROM TrialData AS td where td.patient.id in" +
+				"(select p.id from Patient p where p.myExport = true AND " +
+				"p.participation.trial.id = :trial_id) ORDER BY td.id");
+			 q2.setParameter("trial_id", trialId);
+		return q2.setFirstResult(offset).setMaxResults(count).getResultList();
 	}
 
 

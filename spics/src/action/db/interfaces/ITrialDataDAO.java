@@ -19,9 +19,13 @@ public interface ITrialDataDAO extends IGenericDAO<TrialData, Long>{
 	
 	public long getTrialDataCount(Trial trial);
 	
-	public List<TrialData> getTrialDatasForPersonalExport(Long trialId, String username);
+	public int getTrialDataCountForPersonalExport(Long trialId, String username);
+	
+	public List<TrialData> getTrialDatasForPersonalExport(Long trialId, String username, int offset, int count);
 
-	public List<TrialData> getTrialDatasForFullExport(Long trialId);
+	public int getTrialDataCountForFullExport(Long trialId);
+	
+	public List<TrialData> getTrialDatasForFullExport(Long trialId, int offset, int count);
 	
 	public int getCountByPatient(Patient p);
 	
