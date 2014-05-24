@@ -4,9 +4,9 @@
             xmlns="urn:jboss:bean-deployer">
             
    <bean name="SPICSwoundTestDatasourceBootstrap" class="org.jboss.resource.adapter.jdbc.local.LocalTxDataSource">
-      <property name="driverClass">org.hsqldb.jdbcDriver</property>
-      <property name="connectionURL">jdbc:hsqldb:.</property>
-      <property name="userName"><value class="java.lang.String">sa</value></property>
+      <property name="driverClass">com.mysql.jdbc.Driver"</property>
+      <property name="connectionURL">jdbc:mysql://localhost:3306/spics</property>
+      <property name="userName"><value class="java.lang.String">root</value></property>
       <property name="password"><value class="java.lang.String"></value></property>
       <property name="jndiName">java:/SPICSwoundTestDatasource</property>
       <property name="minSize">0</property>

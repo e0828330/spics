@@ -19,7 +19,7 @@ public class StringConstraint extends Constraint implements Serializable {
 
 	private transient MessageUtils messages;
 	
-	@Column(name="REGEXP")
+	@Column(name="[REGEXP]")
 	private String regexp;
 
 	public StringConstraint() {
