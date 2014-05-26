@@ -28,7 +28,7 @@
 	<property name="war.dir" value="exploded-archives/${project.name}.war" />
 	<property name="test.results" value="testresults" />
 	<property name="custom.jsf.dir" value="exploded-archives/customjsf" />
-	<property name="custom.jsf.jar" value="spics.jsf.jar" />
+	<property name="custom.jsf.jar" value="spics-jsf.jar" />
 	<property name="test.dir" value="test-build" />
 	<property name="bootstrap.dir" value="${basedir}/bootstrap" />
 	<property name="deploy.dir" value="${jboss.home}/server/default/deploy" />
@@ -182,7 +182,7 @@
 
 				<!-- drools -->
 				<include name="drools-*.jar" />
-				<include name="core.jar" />
+				<include name="org.eclipse.jdt.core.jar" />
 				<include name="janino*.jar" />
 				<include name="antlr-*.jar" />
 				<include name="mvel*.jar" />
