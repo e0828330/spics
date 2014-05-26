@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 
-<project name="SPICSwound" default="deploy" basedir=".">
+<project name="SPICSwound" default="deploy" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+
+    <path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
+    <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
+           uri="antlib:org.apache.maven.artifact.ant"
+           classpathref="maven-ant-tasks.classpath" />
 
 	<!-- Give user a chance to override without editing this file or typing -D -->
 	<property file="${basedir}/build.properties" />
@@ -45,11 +50,16 @@
 	<property name="schema.version" value="2.0" />
 
 	<fileset id="lib" dir="${lib.dir}">
-		<include name="*.jar" />
-	</fileset>
+        <include name="*.jar" />
+    </fileset>
+
+    <fileset id="mvn" />
+    <artifact:pom id="spicspom" file="pom.xml" />
+    <artifact:dependencies filesetId="mvn" pomRefId="spicspom" />
 
 	<path id="build.classpath">
 		<fileset refid="lib" />
+        <fileset refid="mvn" />
 		<pathelement path="${java.class.path}/" />
 	</path>
 

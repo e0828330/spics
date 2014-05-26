@@ -3,3 +3,5 @@ exploded-archives/
 testresults/
 target/
 spics/resources/deployment.properties
+.idea/
+*.iml
