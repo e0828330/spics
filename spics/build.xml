@@ -49,17 +49,16 @@
 	<property name="src.schema.dir" value="${schema.dir}/org/jboss/seam" />
 	<property name="schema.version" value="2.0" />
 
-	<fileset id="lib" dir="${lib.dir}">
+	<!--<fileset id="lib" dir="${lib.dir}">
         <include name="*.jar" />
-    </fileset>
+    </fileset>-->
 
-    <fileset id="mvn" />
+    <fileset id="lib" />
     <artifact:pom id="spicspom" file="pom.xml" />
-    <artifact:dependencies filesetId="mvn" pomRefId="spicspom" />
+    <artifact:dependencies filesetId="lib" pomRefId="spicspom" />
 
 	<path id="build.classpath">
 		<fileset refid="lib" />
-        <fileset refid="mvn" />
 		<pathelement path="${java.class.path}/" />
 	</path>
 
