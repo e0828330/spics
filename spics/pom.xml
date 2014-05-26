@@ -17,10 +17,13 @@
             <id>TreeBase SourceForge repository</id>
             <url>http://treebase.sourceforge.net/maven2/</url>
         </repository>
+        <!--  Local Repo created with:
+              mvn install:install-file -Dfile=lib/spics.jsf.jar -DgroupId=spics -DartifactId=spics-jsf -Dversion=1 -Dpackaging=jar -Dmaven.repo.local=./repo -->
+         <repository>
+            <id>Local</id>
+            <url>file://${basedir}/repo/</url>
+        </repository>
     </repositories>
-
-
-    <!-- mvn install:install-file -Dfile=lib/spics.jsf.jar -DgroupId=spics -DartifactId=spics-jsf -Dversion=1 -Dpackaging=jar -->
 
     <dependencies>
         <dependency>
