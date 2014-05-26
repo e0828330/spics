@@ -22,7 +22,7 @@
 	<property name="src.comp.dir" value="src/comp" />
 	<property name="plugin.dir" value="spicsplugins" />
 	<property name="trialform.dir" value="trialforms" />
-	<property name="lib.dir" value="lib" />
+	<property name="lib.dir" value="exploded-archives/lib" />
 	<property name="ear.dir" value="exploded-archives/${project.name}.ear" />
 	<property name="jar.dir" value="exploded-archives/${project.name}.jar" />
 	<property name="war.dir" value="exploded-archives/${project.name}.war" />
@@ -53,9 +53,8 @@
         <include name="*.jar" />
     </fileset>-->
 
-    <fileset id="lib" />
     <artifact:pom id="spicspom" file="pom.xml" />
-    <artifact:dependencies filesetId="lib" pomRefId="spicspom" />
+    <artifact:dependencies filesetId="lib" pomRefId="spicspom" versionsId="dep.versions"/>
 
 	<path id="build.classpath">
 		<fileset refid="lib" />
@@ -66,6 +65,7 @@
 		<mkdir dir="${jar.dir}" />
 		<mkdir dir="${ear.dir}" />
 		<mkdir dir="${war.dir}" />
+        <mkdir dir="${lib.dir}" />
 		<mkdir dir="${dist.dir}" />
 		<mkdir dir="${custom.jsf.dir}" />
 		<mkdir dir="${test.results}" />
@@ -93,6 +93,15 @@
 		</copy>
 	</target>
 
+    <target name="copydependencies" depends="init" description="Copy maven dependencies to lib directory.">
+        <copy todir="${lib.dir}" flatten="true" overwrite="true">
+            <fileset refid="lib" />
+            <mapper classname="org.apache.maven.artifact.ant.VersionMapper"
+                    classpathref="maven-ant-tasks.classpath"
+                    from="${dep.versions}" to="flatten" />
+        </copy>
+    </target>
+
 	<target name="jar" depends="compile,copyclasses" description="Build the distribution .jar file">
 		<copy todir="${jar.dir}">
 			<fileset dir="${basedir}/resources">
@@ -110,7 +119,7 @@
 		<copy tofile="${jar.dir}/import.sql" file="${basedir}/resources/import-${profile}.sql" overwrite="true" />
 	</target>
 
-	<target name="war" depends="compile" description="Build the distribution .war file">
+	<target name="war" depends="compile, copydependencies" description="Build the distribution .war file">
 		<copy todir="${war.dir}">
 			<fileset dir="${basedir}/view" />
 		</copy>
@@ -148,7 +157,7 @@
 		</copy>
 	</target>
 
-	<target name="ear" description="Build the EAR">
+	<target name="ear" description="Build the EAR" depends="copydependencies">
 		<copy todir="${ear.dir}">
 			<fileset dir="${basedir}/resources">
 				<include name="*jpdl.xml" />
