@@ -564,6 +564,10 @@ public class TestDataGeneratorBean implements TestDataGenerator {
 
 		trialDataDAO.persist(trialData);
 
+		
+		/**
+		 * 1 Eintrag Anfang
+		 */
 		IntegerValue systolischValue = new IntegerValue();
 		systolischValue.setAttribute(systolisch);
 		systolischValue.setTrialData(trialData);
@@ -616,6 +620,10 @@ public class TestDataGeneratorBean implements TestDataGenerator {
 				systolischValue2);
 		eventManager.registerEvent(vce7, true);
 
+		/**
+		 * 2 Eintrag Anfang
+		 */
+		
 		IntegerValue diastolischValue2 = new IntegerValue();
 		diastolischValue2.setAttribute(diastolisch);
 		diastolischValue2.setTrialData(secondTime);
@@ -658,7 +666,65 @@ public class TestDataGeneratorBean implements TestDataGenerator {
 
 		ValueCreateEvent vce10 = new ValueCreateEvent(user, systolischValue3);
 		eventManager.registerEvent(vce10, true);
+		
+		
+		
+		
+		/* OWN DATA */
+		
+		for  (int i = 0; i < 8000; i++) {
+			TrialData trialDataTmp = new TrialData();
+			trialDataTmp.setPatient(patient);
+			trialDataTmp.setLastModified(new Date(System.currentTimeMillis()));
+			trialDataTmp.setSavedOn(new Date(System.currentTimeMillis()));
+			trialDataTmp.setValues(new HashSet<Value>());
+			trialDataTmp.setTrialform(form);
+			trialDataTmp.setSavedBy(user);
+			trialDataTmp.setLastModifiedBy(user);
 
+			trialDataDAO.persist(trialDataTmp);			
+			
+			
+			IntegerValue diastolischValueTmp = new IntegerValue();
+			diastolischValueTmp.setAttribute(diastolisch);
+			diastolischValueTmp.setTrialData(trialDataTmp);
+			diastolischValueTmp.setValue(180 + (i % 40));
+			trialDataTmp.getValues().add(diastolischValueTmp);
+			valueDAO.persist(diastolischValueTmp);
+	
+			ValueCreateEvent vceTmp = new ValueCreateEvent(otherUser,
+					diastolischValueTmp);
+			eventManager.registerEvent(vceTmp, true);
+	
+			IntegerValue pulsamplValueTmp = new IntegerValue();
+			pulsamplValueTmp.setAttribute(pulsamplitude);
+			pulsamplValueTmp.setTrialData(trialDataTmp);
+			pulsamplValueTmp.setValue(60 + (i % 20));
+			trialDataTmp.getValues().add(pulsamplValueTmp);
+			valueDAO.persist(pulsamplValueTmp);
+	
+			ValueCreateEvent vceTmp2 = new ValueCreateEvent(otherUser, pulsamplValueTmp);
+			eventManager.registerEvent(vceTmp2, true);
+	
+			IntegerValue systolischValueTmp = new IntegerValue();
+			systolischValueTmp.setAttribute(systolisch);
+			systolischValueTmp.setTrialData(trialDataTmp);
+			systolischValueTmp.setValue(700 + (i % 40));
+			trialDataTmp.getValues().add(systolischValueTmp);
+			valueDAO.persist(systolischValueTmp);
+	
+			ValueCreateEvent vceTmp3 = new ValueCreateEvent(user, systolischValueTmp);
+			eventManager.registerEvent(vceTmp3, true);
+		}
+		/* OWN DATA END */
+		
+		
+
+		
+		/**
+		 * 3 Eintrag Anfang
+		 */
+		
 		IntegerValue diastolischValue3 = new IntegerValue();
 		diastolischValue3.setAttribute(diastolisch);
 		diastolischValue3.setTrialData(thirdTime);
